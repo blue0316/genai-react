@@ -102,7 +102,7 @@ const Folder = ({
               <IconCaretRight size={18} />
             )}
             <input
-              className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 text-white outline-none focus:border-neutral-100"
+              className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 text-black outline-none focus:border-neutral-100"
               type="text"
               value={renameValue}
               onChange={(e) => setRenameValue(e.target.value)}
@@ -112,7 +112,7 @@ const Folder = ({
           </div>
         ) : (
           <button
-            className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-[#343541]/90`}
+          className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm text-black transition-colors duration-200 hover:bg-white`}
             onClick={() => setIsOpen(!isOpen)}
             onDrop={(e) => dropHandler(e)}
             onDragOver={allowDrop}
@@ -147,7 +147,7 @@ const Folder = ({
                 setIsRenaming(false);
               }}
             >
-              <IconCheck size={18} />
+              <IconCheck size={18} className="hover:text-green-400" />
             </SidebarActionButton>
             <SidebarActionButton
               handleClick={(e) => {
@@ -156,7 +156,7 @@ const Folder = ({
                 setIsRenaming(false);
               }}
             >
-              <IconX size={18} />
+              <IconX size={18} className="hover:text-red-400" />
             </SidebarActionButton>
           </div>
         )}
@@ -170,7 +170,7 @@ const Folder = ({
                 setRenameValue(currentFolder.name);
               }}
             >
-              <IconPencil size={18} />
+              <IconPencil size={18} className="text-gray-300 hover:text-green-400"/>
             </SidebarActionButton>
             <SidebarActionButton
               handleClick={(e) => {
@@ -178,7 +178,7 @@ const Folder = ({
                 setIsDeleting(true);
               }}
             >
-              <IconTrash size={18} />
+              <IconTrash size={18} className="text-gray-300 hover:text-red-400"/>
             </SidebarActionButton>
           </div>
         )}

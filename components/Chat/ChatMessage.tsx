@@ -6,6 +6,7 @@ import {
   IconTrash,
   IconUser,
 } from '@tabler/icons-react';
+import { SiOpenai } from '@icons-pack/react-simple-icons';
 import { FC, memo, useContext, useEffect, useRef, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -43,6 +44,8 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
   const [messagedCopied, setMessageCopied] = useState(false);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const bubbleRef = useRef<HTMLDivElement>(null);
 
   const toggleEditing = () => {
     setIsEditing(!isEditing);
@@ -126,48 +129,55 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
 
   return (
     <div
-      className={`group md:px-4 ${
+      className={`group ${
         message.role === 'assistant'
-          ? 'border-b border-black/10 bg-gray-50 text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
-          : 'border-b border-black/10 bg-white text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+          ? 'rounded-2xl p-3'
+          : 'rounded-2xl p-3'
       }`}
-      style={{ overflowWrap: 'anywhere' }}
-    >
-      <div className="relative m-auto flex p-4 text-base md:max-w-2xl md:gap-6 md:py-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
-        <div className="min-w-[40px] text-right font-bold">
-          {message.role === 'assistant' ? (
-            <IconRobot size={30} />
-          ) : (
-            <IconUser size={30} />
-          )}
+      style={{
+        overflowWrap: 'anywhere',
+        display: 'flex',
+        justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start',
+        width: '100%',
+      }}
+    >  
+      <div className="relative flex items-start prose">
+      {message.role === 'assistant' && (
+        <div className={`h-10 w-10 rounded-xl inline-flex items-center justify-center mr-2 bg-teal-500 text-white flex-shrink-0`}>
+          <SiOpenai size={30} />
         </div>
-
-        <div className="prose mt-[-2px] w-full dark:prose-invert">
-          {message.role === 'user' ? (
-            <div className="flex w-full">
-              {isEditing ? (
-                <div className="flex w-full flex-col">
-                  <textarea
-                    ref={textareaRef}
-                    className="w-full resize-none whitespace-pre-wrap border-none dark:bg-[#343541]"
-                    value={messageContent}
-                    onChange={handleInputChange}
-                    onKeyDown={handlePressEnter}
-                    onCompositionStart={() => setIsTyping(true)}
-                    onCompositionEnd={() => setIsTyping(false)}
-                    style={{
-                      fontFamily: 'inherit',
-                      fontSize: 'inherit',
-                      lineHeight: 'inherit',
-                      padding: '0',
-                      margin: '0',
-                      overflow: 'hidden',
-                    }}
-                  />
-
-                  <div className="mt-10 flex justify-center space-x-4">
+      )}
+      <div className={`prose flex-grow max-w-full`}>
+      {message.role === 'user' ? (
+          <div className="flex justify-end">
+            {isEditing ? (
+              <div className="prose flex w-full flex-col max-w-full">
+                <textarea
+                  ref={textareaRef}
+                  className="bg-blue-500 rounded-2xl text-white px-4 py-2"
+                  value={messageContent}
+                  onChange={handleInputChange}
+                  onKeyDown={handlePressEnter}
+                  onCompositionStart={() => setIsTyping(true)}
+                  onCompositionEnd={() => setIsTyping(false)}
+                  style={{
+                    fontFamily: 'inherit',
+                    fontSize: 'inherit',
+                    lineHeight: 'inherit',
+                    padding: '10px 12px 10px 12px',
+                    margin: '0',
+                    overflow: 'hidden',
+                    height: 'auto',
+                    minHeight: '56px',
+                    maxHeight: '150px',
+                    minWidth: bubbleRef.current ? bubbleRef.current.clientWidth + 'px' : '100%',
+                    width: '100%',
+                    resize: 'vertical',
+                  }}
+                />
+                  <div className="mt-2 flex justify-center space-x-3">
                     <button
-                      className="h-[40px] rounded-md bg-blue-500 px-4 py-1 text-sm font-medium text-white enabled:hover:bg-blue-600 disabled:opacity-50"
+                      className="text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300 ml-1"
                       onClick={handleEditMessage}
                       disabled={messageContent.trim().length <= 0}
                     >
@@ -185,13 +195,15 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                   </div>
                 </div>
               ) : (
-                <div className="prose whitespace-pre-wrap dark:prose-invert flex-1">
+                <div
+                ref={bubbleRef} 
+                className="prose whitespace-pre-wrap dark:prose-invert flex-1 text-white bg-blue-500 rounded-2xl px-4 py-1.5 w-fit justify-end">
                   {message.content}
                 </div>
               )}
 
               {!isEditing && (
-                <div className="md:-mr-8 ml-1 md:ml-0 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
+                <div className="md:-mr-8 ml-1 md:ml-0 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-start md:justify-start">
                   <button
                     className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     onClick={toggleEditing}
@@ -208,7 +220,8 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
               )}
             </div>
           ) : (
-            <div className="flex flex-row">
+            <div className="flex flex-row items-start">
+              <div className="bg-zinc-100 rounded-2xl px-4 py-1.5 w-full md:w-auto">
               <MemoizedReactMarkdown
                 className="prose dark:prose-invert flex-1"
                 remarkPlugins={[remarkGfm, remarkMath]}
@@ -255,7 +268,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
               >
                 {message.content}
               </MemoizedReactMarkdown>
-
+              </div>
               <div className="md:-mr-8 ml-1 md:ml-0 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
                 {messagedCopied ? (
                   <IconCheck
