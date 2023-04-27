@@ -149,7 +149,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
       )}
       <div className={`prose flex-grow max-w-full`}>
       {message.role === 'user' ? (
-          <div className="flex justify-end">
+          <div className="flex flex-col items-end">
             {isEditing ? (
               <div className="prose flex w-full flex-col max-w-full">
                 <textarea
@@ -195,28 +195,31 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                   </div>
                 </div>
               ) : (
+              <div>
                 <div
                 ref={bubbleRef} 
                 className="prose whitespace-pre-wrap dark:prose-invert flex-1 text-white bg-blue-500 rounded-2xl px-4 py-1.5 w-fit justify-end">
                   {message.content}
                 </div>
+              </div>
               )}
-
               {!isEditing && (
-                <div className="md:-mr-8 ml-1 md:ml-0 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-start md:justify-start">
+              <div className="mt-1">
+                <div className="md:ml-0 md:flex-row gap-4 md:gap-1 items-center md:items-start justify-start md:justify-start mt-auto">
                   <button
-                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg px-2 text-sm h-6 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200"
                     onClick={toggleEditing}
                   >
                     <IconEdit size={20} />
                   </button>
                   <button
-                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                    className="invisible group-hover:visible focus:visible text-red-500 hover:text-red-700 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg px-2 text-sm h-6 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200"
                     onClick={handleDeleteMessage}
                   >
                     <IconTrash size={20} />
                   </button>
                 </div>
+              </div>
               )}
             </div>
           ) : (
@@ -277,7 +280,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                   />
                 ) : (
                   <button
-                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-green-700 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg px-2 text-sm h-6 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200"
                     onClick={copyOnClick}
                   >
                     <IconCopy size={20} />

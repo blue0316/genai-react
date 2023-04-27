@@ -136,6 +136,15 @@ const Folder = ({
             <SidebarActionButton
               handleClick={(e) => {
                 e.stopPropagation();
+                setIsDeleting(false);
+                setIsRenaming(false);
+              }}
+            >
+              <IconX size={18} className="hover:text-red-400" />
+            </SidebarActionButton>
+            <SidebarActionButton
+              handleClick={(e) => {
+                e.stopPropagation();
 
                 if (isDeleting) {
                   handleDeleteFolder(currentFolder.id);
@@ -148,15 +157,6 @@ const Folder = ({
               }}
             >
               <IconCheck size={18} className="hover:text-green-400" />
-            </SidebarActionButton>
-            <SidebarActionButton
-              handleClick={(e) => {
-                e.stopPropagation();
-                setIsDeleting(false);
-                setIsRenaming(false);
-              }}
-            >
-              <IconX size={18} className="hover:text-red-400" />
             </SidebarActionButton>
           </div>
         )}

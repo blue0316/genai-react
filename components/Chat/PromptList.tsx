@@ -29,7 +29,7 @@ export const PromptList: FC<Props> = ({
             index === activePromptIndex
               ? 'bg-gray-200 dark:bg-[#202123] dark:text-black'
               : ''
-          } cursor-pointer px-3 py-2 text-sm text-black dark:text-white`}
+          } cursor-pointer px-2 py-2 text-sm text-black dark:text-white`}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();

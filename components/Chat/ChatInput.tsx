@@ -5,6 +5,8 @@ import {
   IconPlayerStop,
   IconRepeat,
   IconSend,
+  IconX,
+  IconPlus,
 } from '@tabler/icons-react';
 import {
   KeyboardEvent,
@@ -35,6 +37,7 @@ interface Props {
   stopConversationRef: MutableRefObject<boolean>;
   textareaRef: MutableRefObject<HTMLTextAreaElement | null>;
   showScrollDownButton: boolean;
+  onNewConversation?: () => void;
 }
 
 export const ChatInput = ({
@@ -43,7 +46,8 @@ export const ChatInput = ({
   onScrollDownClick,
   stopConversationRef,
   textareaRef,
-  showScrollDownButton
+  showScrollDownButton,
+  onNewConversation,
 }: Props) => {
   const { t } = useTranslation('chat');
 
@@ -257,29 +261,39 @@ export const ChatInput = ({
   }, []);
 
   return (
-    <div className="absolute bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent via-white to-white pt-6 dark:border-white/20 dark:via-[#343541] dark:to-[#343541] md:pt-2">
-      <div className="stretch mx-2 mt-4 flex flex-row gap-3 last:mb-2 md:mx-4 md:mt-[35px] md:last:mb-6 lg:mx-auto lg:max-w-3xl py-3">
+    <div className="bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent via-white to-white pt-6 dark:border-white/20 dark:via-[#343541] dark:to-[#343541] md:pt-2 shrink-0 fixed px-3 py-3">
+      <div className="rounded-lg border-zinc-300 mx-2 mt-4 flex flex-row gap-3 last:mb-2 md:mx-4 md:mt-[35px] md:last:mb-6 lg:mx-auto lg:max-w-3xl">
         {messageIsStreaming && (
           <button
             className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
             onClick={handleStopConversation}
           >
-            <IconPlayerStop size={16} /> {t('Stop Generating')}
+            <IconX size={16} /> {t('Stop Generating')}
           </button>
         )}
 
-        {!messageIsStreaming &&
-          selectedConversation &&
-          selectedConversation.messages.length > 0 && (
-            <button
-              className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
-              onClick={onRegenerate}
-            >
-              <IconRepeat size={16} /> {t('Regenerate response')}
-            </button>
+{!messageIsStreaming &&
+  selectedConversation &&
+  selectedConversation.messages.length > 0 && (
+    <div className="absolute top-0 left-0 right-0 mx-auto mb-3 flex justify-center space-x-4 md:mb-0 md:mt-2">
+      <button
+        className="flex w-fit items-center gap-1 rounded-lg border border-neutral-200 bg-white h-8 px-2 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white"
+        onClick={onRegenerate}
+      >
+        <IconRepeat size={16} /> {t('Regenerate')}
+      </button>
+      {onNewConversation && (
+        <button
+          className="flex w-fit items-center gap-1 rounded-lg border border-neutral-200 bg-white h-8 px-2 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white"
+          onClick={onNewConversation}
+        >
+          <IconPlus size={16} /> {t('New Chat')}
+        </button>
+      )}
+    </div>
           )}
 
-        <div className="relative mx-2 flex w-full flex-grow flex-col rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4">
+        <div className="relative mx-2 flex w-full flex-grow flex-col rounded-xl border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4">
           <button
             className="absolute left-2 top-2 rounded-sm p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
             onClick={() => setShowPluginSelect(!showPluginSelect)}
@@ -313,7 +327,7 @@ export const ChatInput = ({
 
           <textarea
             ref={textareaRef}
-            className="m-0 w-full resize-none border-0 bg-transparent p-0 py-2 pr-8 pl-10 text-black dark:bg-transparent dark:text-white md:py-3 md:pl-10"
+            className="m-0 w-full resize-none border-0 bg-transparent px-3 py-3 pr-8 pl-10 text-black dark:bg-transparent dark:text-white md:py-3 md:pl-10"
             style={{
               resize: 'none',
               bottom: `${textareaRef?.current?.scrollHeight}px`,
@@ -325,7 +339,7 @@ export const ChatInput = ({
               }`,
             }}
             placeholder={
-              t('Type a message or type "/" to select a prompt...') || ''
+              t('Type message or type / to select a prompt') || ''
             }
             value={content}
             rows={1}

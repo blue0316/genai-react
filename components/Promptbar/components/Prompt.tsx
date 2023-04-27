@@ -100,12 +100,12 @@ export const PromptComponent = ({ prompt }: Props) => {
 
       {(isDeleting || isRenaming) && (
         <div className="absolute right-1 z-10 flex text-gray-300">
-          <SidebarActionButton handleClick={handleDelete}>
-            <IconCheck size={18} className="text-gray-300 hover:text-green-400"/>
-          </SidebarActionButton>
-
           <SidebarActionButton handleClick={handleCancelDelete}>
             <IconX size={18} className="text-gray-300 hover:text-red-400"/>
+          </SidebarActionButton>
+
+          <SidebarActionButton handleClick={handleDelete}>
+            <IconCheck size={18} className="text-gray-300 hover:text-green-400"/>
           </SidebarActionButton>
         </div>
       )}

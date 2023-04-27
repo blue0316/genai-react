@@ -1,7 +1,7 @@
 import { IconFolderPlus, IconMistOff, IconPlus } from '@tabler/icons-react';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { useEffect } from 'react';
 
 import {
   CloseSidebarButton,
@@ -55,11 +55,27 @@ const Sidebar = <T,>({
     e.target.style.background = 'none';
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
+    }
+  }, [isOpen]);
+
   return isOpen ? (
     <div>
       <div
-        className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#F4F4F5] p-2 text-[14px] transition-all sm:relative sm:top-0`}
+        className={`fixed top-0 ${side}-0 z-50 flex h-full w-[60%] flex-none flex-col space-y-2 bg-[#F4F4F5] p-2 text-[14px] transition-all sm:relative sm:top-0`}
       >
+        <div className="text-left text-2xl font-bold text-black pt-3 pb-1">
+            Genesis⚡️
+          </div>
+          <Search
+          placeholder={t('Search...') || ''}
+          searchTerm={searchTerm}
+          onSearch={handleSearchTerm}
+        />
         <div className="flex items-center">
           <button
             className="text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-black p-3 text-black transition-colors duration-200 hover:bg-gray-500/10"
@@ -79,12 +95,6 @@ const Sidebar = <T,>({
             <IconFolderPlus size={16} />
           </button>
         </div>
-        <Search
-          placeholder={t('Search...') || ''}
-          searchTerm={searchTerm}
-          onSearch={handleSearchTerm}
-        />
-
         <div className="flex-grow overflow-auto ">
           {items?.length > 0 && (
             <div className="flex border-b border-black pb-2">
@@ -106,12 +116,12 @@ const Sidebar = <T,>({
             <div className="mt-8 select-none text-center text-black opacity-50">
               <IconMistOff className="mx-auto mb-3" />
               <span className="text-[14px] leading-normal">
-                {t('No data.')}
+                {t('⚡️')}
               </span>
             </div>
           )}
         </div>
-        {footerComponent}
+        
       </div>
 
       <CloseSidebarButton onClick={toggleOpen} side={side} />

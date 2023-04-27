@@ -1,4 +1,4 @@
-import { IconClearAll, IconSettings } from '@tabler/icons-react';
+import { IconClearAll, IconSettings, IconSettings2, IconTrash, IconTrashOff, IconTrashX } from '@tabler/icons-react';
 import {
   MutableRefObject,
   memo,
@@ -55,6 +55,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       prompts,
     },
     handleUpdateConversation,
+    handleNewConversation,
     dispatch: homeDispatch,
   } = useContext(HomeContext);
 
@@ -348,25 +349,20 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   }, [messagesEndRef]);
 
   return (
-    <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
+    <div className="relative flex flex-grow h-screen flex-col overflow-auto bg-white dark:bg-[#343541] transition-transform">
       {!(apiKey || serverSideApiKeyIsSet) ? (
         <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
-          <div className="text-center text-4xl font-bold text-black dark:text-white">
+          <div className="text-center text-7xl font-bold text-black dark:text-white">
             Genesis⚡️
           </div>
           <div className="text-center text-lg text-black dark:text-white">
-            <div className="mb-8">{`THE POWER OF CREATION, AT YOUR FINGERTIPS.`}</div>
-            <div className="mb-2 font-bold">
-              Your All-in-One AI-Powered Business Assistant
+            <div className="mb-.05 font-bold">
+              THE POWER OF CREATION, AT YOUR FINGERTIPS.
             </div>
           </div>
           <div className="text-center text-gray-500 dark:text-gray-400">
             <div className="mb-2">
-              You have a world of potential. We have the tools to help you unlock it.
-            </div>
-            <div className="mb-2">
-              At Genesis, we're passionate about empowering entrepreneurs like you to build and grow successful businesses. With our AI-driven web app, we make it easier than ever to navigate the world of entrepreneurship.
-            </div>
+              Genesis is committed to helping entrepreneurs like you create and grow successful businesses. Our AI-powered web app simplifies the complex world of entrepreneurship and makes it accessible for all. </div>
             <div className="mb-2">
               {t(
                 'Please set your OpenAI API key in the bottom left of the sidebar.',
@@ -403,7 +399,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <Spinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
-                      'Chatbot UI'
+                      'Genesis'
                     )}
                   </div>
 
@@ -437,11 +433,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               </>
             ) : (
               <>
-                <div className="sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
-                  {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
-                  : {selectedConversation?.temperature} |
+              
+                <div className="justify-center z-40 fixed top-0 left-0 w-full flex bg-[#f9f7f9] py-3 px-10 text-[#3d3d3d]">
+                  {selectedConversation?.name}
                   <button
-                    className="ml-2 cursor-pointer hover:opacity-50"
+                    className="hidden ml-2 cursor-pointer hover:opacity-50"
                     onClick={handleSettings}
                   >
                     <IconSettings size={18} />
@@ -450,7 +446,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     className="ml-2 cursor-pointer hover:opacity-50"
                     onClick={onClearAll}
                   >
-                    <IconClearAll size={18} />
+                    <IconTrash size={18} />
                   </button>
                 </div>
                 {showSettings && (
@@ -501,6 +497,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               }
             }}
             showScrollDownButton={showScrollDownButton}
+            onNewConversation={handleNewConversation}
           />
         </>
       )}

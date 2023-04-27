@@ -67,14 +67,14 @@ export const ConversationComponent = ({ conversation }: Props) => {
 
   const handleConfirm: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
-    if (isDeleting) {
+    if (isDeleting && !isRenaming) {
       handleDeleteConversation(conversation);
     } else if (isRenaming) {
       handleRename(conversation);
     }
     setIsDeleting(false);
     setIsRenaming(false);
-  };
+  };  
 
   const handleCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
@@ -142,11 +142,11 @@ export const ConversationComponent = ({ conversation }: Props) => {
       {(isDeleting || isRenaming) &&
         selectedConversation?.id === conversation.id && (
           <div className="absolute right-1 z-10 flex text-gray-300">
-            <SidebarActionButton handleClick={handleConfirm}>
-              <IconCheck size={18} className="hover:text-green-400" />
-            </SidebarActionButton>
             <SidebarActionButton handleClick={handleCancel}>
-             <IconX size={18} className="hover:text-red-400" />
+              <IconX size={18} className="hover:text-red-400" />
+            </SidebarActionButton>
+            <SidebarActionButton handleClick={handleConfirm}>
+             <IconCheck size={18} className="hover:text-green-400" />
             </SidebarActionButton>
           </div>
         )}
