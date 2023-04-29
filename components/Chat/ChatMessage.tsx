@@ -141,13 +141,13 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
         width: '100%',
       }}
     >  
-      <div className="relative flex items-start prose">
+      <div className="relative flex items-start prose ">
       {message.role === 'assistant' && (
         <div className={`h-10 w-10 rounded-xl inline-flex items-center justify-center mr-2 bg-teal-500 text-white flex-shrink-0`}>
           <SiOpenai size={30} />
         </div>
       )}
-      <div className={`prose flex-grow max-w-full`}>
+      <div className={`prose flex-grow max-w-full `}>
       {message.role === 'user' ? (
           <div className="flex flex-col items-end">
             {isEditing ? (

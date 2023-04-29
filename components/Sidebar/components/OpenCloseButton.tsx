@@ -10,8 +10,8 @@ export const CloseSidebarButton = ({ onClick, side }: Props) => {
     <>
       <button
         className={`fixed top-2 ${
-          side === 'right' ? 'right-[270px]' : 'left-[270px]'
-        } z-50 h-7 w-7 border border-gray-300 dark:border-gray-600 hover:text-gray-400 dark:text-white dark:hover:text-gray-300 sm:top-0.5 sm:${
+          side === 'right' ? 'right-[370px]' : 'left-[370px]'
+        } z-50 h-7 w-7 dark:border-gray-600 hover:text-gray-400 dark:text-white dark:hover:text-gray-300 sm:top-0.5 sm:${
           side === 'right' ? 'right-[270px]' : 'left-[270px]'
         } sm:h-8 sm:w-8 sm:text-neutral-700 text-[#3d3d3d]`}
         onClick={onClick}

@@ -10,6 +10,8 @@ import { Settings } from '@/types/settings';
 
 import HomeContext from '@/pages/api/home/home.context';
 
+import { Key } from '@/components/Settings/Key';
+
 interface Props {
   open: boolean;
   onClose: () => void;

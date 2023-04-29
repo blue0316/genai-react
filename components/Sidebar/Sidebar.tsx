@@ -1,7 +1,9 @@
-import { IconFolderPlus, IconMistOff, IconPlus } from '@tabler/icons-react';
-import { ReactNode } from 'react';
+import { IconFolderPlus, IconMistOff, IconPlus, IconDots } from '@tabler/icons-react';
+import { ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+
+import { ChatbarSettings } from '../Chatbar/components/ChatbarSettings';
 
 import {
   CloseSidebarButton,
@@ -55,6 +57,11 @@ const Sidebar = <T,>({
     e.target.style.background = 'none';
   };
 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };  
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflowY = 'hidden';
@@ -66,9 +73,9 @@ const Sidebar = <T,>({
   return isOpen ? (
     <div>
       <div
-        className={`fixed top-0 ${side}-0 z-50 flex h-full w-[60%] flex-none flex-col space-y-2 bg-[#F4F4F5] p-2 text-[14px] transition-all sm:relative sm:top-0`}
+        className={`fixed top-0 ${side}-0 z-50 flex h-full w-[358px] flex-none flex-col space-y-2 bg-[#F4F4F5] p-2 text-[14px] transition-all sm:relative sm:top-0`}
       >
-        <div className="text-left text-2xl font-bold text-black pt-3 pb-1">
+        <div className="text-left text-2xl font-bold text-black pt-3 pb-1 hidden">
             Genesis⚡️
           </div>
           <Search
@@ -113,16 +120,17 @@ const Sidebar = <T,>({
               {itemComponent}
             </div>
           ) : (
-            <div className="mt-8 select-none text-center text-black opacity-50">
-              <IconMistOff className="mx-auto mb-3" />
+            <div className="mt-8 select-none text-center text-black opacity-50 ">
+              <IconMistOff className="mx-auto mb-3 hidden" />
               <span className="text-[14px] leading-normal">
-                {t('⚡️')}
+                {t('Let there be... ⚡️')}
               </span>
             </div>
           )}
         </div>
-        
+        {footerComponent}
       </div>
+      
 
       <CloseSidebarButton onClick={toggleOpen} side={side} />
     </div>
