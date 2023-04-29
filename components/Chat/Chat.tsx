@@ -435,12 +435,12 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             ) : (
               <>
               
-                <div className="justify-center border-b backdrop-blur-lg z-40 fixed top-0 left-0 w-full flex bg-white/80 py-3 px-10 shrink-0 text-[#3d3d3d]">
+                <div className="justify-left border-b backdrop-blur-lg z-40 fixed top-0 left-0 w-full flex bg-white/80 py-3 px-10 shrink-0 text-[#3d3d3d]">
                 <div className="text-left text-sm font-bold text-black dark:text-white">
             Genesis⚡️</div>
                   {selectedConversation?.name}
                   <button
-                    className="hidden ml-2 cursor-pointer hover:opacity-50"
+                    className="ml-2 cursor-pointer hover:opacity-50"
                     onClick={handleSettings}
                   >
                     <IconSettings size={18} />
