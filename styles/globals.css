@@ -32,9 +32,21 @@ html {
   background: #ffffff;
 }
 
+.topbar {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
 @media (max-width: 720px) {
   pre {
     width: calc(100vw - 110px);
+  }
+
+  .topbar {
+    margin-left: 0;
+    margin-right: 0;
+    display: block;
   }
 }
 
