@@ -280,11 +280,11 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                   />
                 ) : (
                   <button
-                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-green-700 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg px-2 text-sm h-6 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200"
-                    onClick={copyOnClick}
-                  >
-                    <IconCopy size={20} />
-                  </button>
+                  className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                  onClick={copyOnClick}
+                >
+                  <IconCopy size={20} />
+                </button>
                 )}
               </div>
             </div>

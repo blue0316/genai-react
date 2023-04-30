@@ -75,7 +75,7 @@ const Sidebar = <T,>({
       <div
         className={`fixed top-0 ${side}-0 z-50 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#F4F4F5] p-2 text-[14px] transition-all sm:relative sm:top-0`}
       >
-        <div className="text-left text-2xl font-bold text-black pt-3 pb-1">
+        <div className="text-left text-l font-bold text-black pt-0 pb-1">
             Genesis⚡️
           </div>
           <Search
