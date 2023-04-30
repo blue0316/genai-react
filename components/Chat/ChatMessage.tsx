@@ -177,14 +177,14 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                 />
                   <div className="mt-2 flex justify-center space-x-3">
                     <button
-                      className="text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300 ml-1"
+                      className="text-gray-500 hover:text-gray-800 ml-1"
                       onClick={handleEditMessage}
                       disabled={messageContent.trim().length <= 0}
                     >
                       {t('Save & Submit')}
                     </button>
                     <button
-                      className="h-[40px] rounded-md border border-neutral-300 px-4 py-1 text-sm font-medium text-neutral-700 hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
+                      className="h-[40px] rounded-md border border-neutral-300 px-4 py-1 text-sm font-medium text-neutral-700 hover:bg-neutral-100"
                       onClick={() => {
                         setMessageContent(message.content);
                         setIsEditing(false);
@@ -198,7 +198,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
               <div>
                 <div
                 ref={bubbleRef} 
-                className="prose whitespace-pre-wrap dark:prose-invert flex-1 text-white bg-blue-500 rounded-2xl px-4 py-1.5 w-fit justify-end">
+                className="prose whitespace-pre-wrap flex-1 text-white bg-blue-500 rounded-2xl px-4 py-1.5 w-fit justify-end">
                   {message.content}
                 </div>
               </div>
@@ -207,13 +207,13 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
               <div className="mt-1">
                 <div className="md:ml-0 md:flex-row gap-4 md:gap-1 items-center md:items-start justify-start md:justify-start mt-auto">
                   <button
-                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg px-2 text-sm h-6 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200"
+                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 rounded-lg px-2 text-sm h-6 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200"
                     onClick={toggleEditing}
                   >
                     <IconEdit size={20} />
                   </button>
                   <button
-                    className="invisible group-hover:visible focus:visible text-red-500 hover:text-red-700 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg px-2 text-sm h-6 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200"
+                    className="invisible group-hover:visible focus:visible text-red-500 hover:text-red-700  rounded-lg px-2 text-sm h-6 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200"
                     onClick={handleDeleteMessage}
                   >
                     <IconTrash size={20} />
@@ -226,7 +226,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
             <div className="flex flex-row items-start">
               <div className="bg-zinc-100 rounded-2xl px-4 py-1.5 w-full md:w-auto">
               <MemoizedReactMarkdown
-                className="prose dark:prose-invert flex-1"
+                className="prose flex-1"
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeMathjax]}
                 components={{
@@ -248,21 +248,21 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                   },
                   table({ children }) {
                     return (
-                      <table className="border-collapse border border-black px-3 py-1 dark:border-white">
+                      <table className="border-collapse border border-black px-3 py-1 ">
                         {children}
                       </table>
                     );
                   },
                   th({ children }) {
                     return (
-                      <th className="break-words border border-black bg-gray-500 px-3 py-1 text-white dark:border-white">
+                      <th className="break-words border border-black bg-gray-500 px-3 py-1 text-white ">
                         {children}
                       </th>
                     );
                   },
                   td({ children }) {
                     return (
-                      <td className="break-words border border-black px-3 py-1 dark:border-white">
+                      <td className="break-words border border-black px-3 py-1 ">
                         {children}
                       </td>
                     );
@@ -276,11 +276,11 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                 {messagedCopied ? (
                   <IconCheck
                     size={20}
-                    className="text-green-500 dark:text-green-400"
+                    className="text-green-500 "
                   />
                 ) : (
                   <button
-                  className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                  className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 "
                   onClick={copyOnClick}
                 >
                   <IconCopy size={20} />

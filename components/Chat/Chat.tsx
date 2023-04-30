@@ -350,18 +350,18 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   }, [messagesEndRef]);
 
   return (
-    <div className="relative flex flex-grow h-screen flex-col overflow-auto bg-white dark:bg-[#343541] transition-transform">
+    <div className="relative flex flex-grow h-screen flex-col overflow-auto bg-white transition-transform">
       {!(apiKey || serverSideApiKeyIsSet) ? (
         <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
-          <div className="text-center text-7xl font-bold text-black dark:text-white">
+          <div className="text-center text-7xl font-bold text-black">
             Genesis⚡️
           </div>
-          <div className="text-center text-lg text-black dark:text-white">
+          <div className="text-center text-lg text-black ">
             <div className="mb-.05 font-bold">
               THE POWER OF CREATION, AT YOUR FINGERTIPS.
             </div>
           </div>
-          <div className="text-center text-gray-500 dark:text-gray-400">
+          <div className="text-center text-gray-500">
             <div className="mb-2">
               Genesis is committed to helping entrepreneurs like you create and grow successful businesses. Our AI-powered web app simplifies the complex world of entrepreneurship and makes it accessible for all. </div>
             <div className="mb-2">
@@ -394,7 +394,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             {selectedConversation?.messages.length === 0 ? (
               <>
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
-                  <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
+                  <div className="text-center text-3xl font-semibold text-gray-800">
                     {models.length === 0 ? (
                       <div>
                         <Spinner size="16px" className="mx-auto" />
@@ -405,7 +405,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                   </div>
 
                   {models.length > 0 && (
-                    <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
+                    <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4">
                       <ModelSelect />
 
                       <SystemPrompt
@@ -436,7 +436,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               <>
               
                 <div className="justify-left border-b backdrop-blur-lg z-40 fixed top-0 left-0 w-full flex bg-white/80 py-3 px-10 shrink-0 text-[#3d3d3d]">
-                <div className="text-left text-sm font-bold text-black dark:text-white">
+                <div className="text-left text-sm font-bold text-black">
             Genesis⚡️&nbsp;
             </div>
             {`"${selectedConversation?.name}"`}
@@ -455,7 +455,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 </div>
                 {showSettings && (
                   <div className="flex flex-col space-y-10 md:mx-auto md:max-w-xl md:gap-6 md:py-3 md:pt-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
-                    <div className="flex h-full flex-col space-y-4 border-b border-neutral-200 p-4 dark:border-neutral-600 md:rounded-lg md:border">
+                    <div className="flex h-full flex-col space-y-4 border-b border-neutral-200 p-4 md:rounded-lg md:border">
                       <ModelSelect />
                     </div>
                   </div>
@@ -480,7 +480,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 {loading && <ChatLoader />}
 
                 <div
-                  className="h-[162px] bg-white dark:bg-[#343541]"
+                  className="h-[162px] bg-white"
                   ref={messagesEndRef}
                 />
               </>

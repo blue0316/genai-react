@@ -62,7 +62,7 @@ export const PluginSelect: FC<Props> = ({
 
   return (
     <div className="flex flex-col bottom-0">
-      <div className="mb-1 w-full rounded border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:border-neutral-600 dark:text-white">
+      <div className="mb-1 w-full rounded border border-neutral-200 bg-transparent pr-2 text-neutral-900 ">
         <select
           ref={selectRef}
           className="w-full cursor-pointer bg-transparent p-2"
@@ -82,7 +82,7 @@ export const PluginSelect: FC<Props> = ({
           <option
             key="chatgpt"
             value="chatgpt"
-            className="dark:bg-[#343541] dark:text-white"
+            className=""
           >
             ChatGPT
           </option>
@@ -91,7 +91,7 @@ export const PluginSelect: FC<Props> = ({
             <option
               key={plugin.id}
               value={plugin.id}
-              className="dark:bg-[#343541] dark:text-white"
+              className=""
             >
               {plugin.name}
             </option>
